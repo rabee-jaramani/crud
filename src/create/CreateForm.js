@@ -23,7 +23,7 @@ const CreateForm = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       // Handle form submission here, including the file attachment
-      console.log(values);
+      console.log(values.file);
       // Append the file to the FormData object
       formData.append('name', values.name);
       formData.append('email', values.email);
