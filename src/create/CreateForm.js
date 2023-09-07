@@ -28,6 +28,18 @@ const CreateForm = () => {
       formData.append('name', values.name);
       formData.append('email', values.email);
       formData.append('file', values.file);
+      // axios
+      //   .post('http://localhost:5000/users/add_user', formData, {
+      //     headers: {
+      //       'Content-Type': 'multipart/form-data', // Important for file uploads
+      //     },
+      //   })
+      //   .then((response) => {
+      //     console.log('Data sent successfully:', response.data);
+      //   })
+      //   .catch((error) => {
+      //     console.error('Error sending data:', error);
+      //   });
       axios
         .post('http://localhost:5000/users/add_user', formData, {
           headers: {
