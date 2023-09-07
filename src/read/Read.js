@@ -1,9 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import json_users from './users.json'
 export default function Read() {
   const [data, setData] = useState([]);
-  const [file, setFile] = useState('');
   function base64ToBlob(base64String, mimeType) {
     const byteCharacters = atob(base64String);
     const byteNumbers = new Array(byteCharacters.length);
@@ -16,7 +14,6 @@ export default function Read() {
     return new Blob([byteArray], { type: mimeType });
   }
   const fetchUsers = () => {
-    // console.log("JSON USERS", json_users[1].file.data.$binary.base64)
     axios
       .get('http://localhost:5000/users')
       .then((response) => {
@@ -28,35 +25,12 @@ export default function Read() {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-
-    // axios
-    //   .get(`http://localhost:5000/users`, { responseType: 'blob' })
-    //   .then((response) => {
-    //     // Create a Blob from the response data with the appropriate content type
-    //     const blob = new Blob([response.data], {
-    //       type: response.headers['content-type'],
-    //     });
-    //     console.log(blob);
-    //     // Create a URL for the Blob
-    //     const objectURL = URL.createObjectURL(blob);
-    //     console.log(objectURL);
-    //     setFile(blob);
-    //     const fileDownloadUrl = URL.createObjectURL(blob);
-    //     console.log(fileDownloadUrl);
-
-    //     // Set the Blob URL in the state to display the Word file
-    //     //   setFileData(objectURL);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error fetching Word file:', error);
-    //   });
   };
   const downloadFile = (user) => {
     const base64String = user.file.data;
     const mimeType = user.file.contentType;
     const downloaded_file = user.file.filename;
     const blob = base64ToBlob(base64String, mimeType);
-
     // Example: Create a download link for the Blob
     const blobUrl = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -64,14 +38,6 @@ export default function Read() {
     link.download = downloaded_file; // Specify the desired file name (without an extension)
     document.body.appendChild(link);
     link.click();
-    // const blobUrl = window.URL.createObjectURL(new Blob([json_users[1].file.data.$binary.base64], {
-    //   type: file.contentType
-    // }));
-    // const link = document.createElement('a');
-    // link.href = blobUrl;
-    // link.download = file.filename;
-    // document.body.appendChild(link);
-    // link.click();
   }
   return (
     <div className="read-cont">
