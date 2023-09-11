@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField, Button, Grid } from '@mui/material';
 import axios from 'axios';
-// import { CloudUpload } from '@mui/icons-material';
 const formData = new FormData();
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required'),
@@ -28,20 +27,8 @@ const CreateForm = () => {
       formData.append('name', values.name);
       formData.append('email', values.email);
       formData.append('file', values.file);
-      // axios
-      //   .post('http://localhost:5000/users/add_user', formData, {
-      //     headers: {
-      //       'Content-Type': 'multipart/form-data', // Important for file uploads
-      //     },
-      //   })
-      //   .then((response) => {
-      //     console.log('Data sent successfully:', response.data);
-      //   })
-      //   .catch((error) => {
-      //     console.error('Error sending data:', error);
-      //   });
       axios
-        .post('http://localhost:5000/users/add_user', formData, {
+        .post('https://server-for-crud.onrender.com/users/add_user', formData, {
           headers: {
             'Content-Type': 'multipart/form-data', // Important for file uploads
           },
@@ -112,7 +99,7 @@ const CreateForm = () => {
               type="submit"
               variant="contained"
               color="primary"
-            // disabled={formik.isSubmitting}
+              // disabled={formik.isSubmitting}
             >
               Submit
             </Button>

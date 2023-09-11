@@ -15,7 +15,7 @@ export default function Read() {
   }
   const fetchUsers = () => {
     axios
-      .get('http://localhost:5000/users')
+      .get('https://server-for-crud.onrender.com/users')
       .then((response) => {
         // Handle the response here (response.data contains the fetched data)
         const users = response.data;
@@ -38,7 +38,7 @@ export default function Read() {
     link.download = downloaded_file; // Specify the desired file name (without an extension)
     document.body.appendChild(link);
     link.click();
-  }
+  };
   return (
     <div className="read-cont">
       <h1>READ PAGE</h1>
